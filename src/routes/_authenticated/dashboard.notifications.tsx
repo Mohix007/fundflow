@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -52,7 +52,7 @@ function NotificationsPage() {
                   </div>
                 </div>
               );
-              return n.link ? <Link key={n.id} to={n.link as string} className="block hover:bg-white/5 rounded-xl">{inner}</Link> : <div key={n.id}>{inner}</div>;
+              return n.link ? <a key={n.id} href={n.link} className="block hover:bg-white/5 rounded-xl">{inner}</a> : <div key={n.id}>{inner}</div>;
             })}
           </div>
         )}
