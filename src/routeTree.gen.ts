@@ -9,38 +9,211 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardWalletRouteImport } from './routes/_authenticated/dashboard.wallet'
+import { Route as AuthenticatedDashboardProjectsRouteImport } from './routes/_authenticated/dashboard.projects'
+import { Route as AuthenticatedDashboardNotificationsRouteImport } from './routes/_authenticated/dashboard.notifications'
+import { Route as AuthenticatedDashboardMessagesRouteImport } from './routes/_authenticated/dashboard.messages'
+import { Route as AuthenticatedDashboardAdminRouteImport } from './routes/_authenticated/dashboard.admin'
+import { Route as AuthenticatedDashboardProjectsNewRouteImport } from './routes/_authenticated/dashboard.projects.new'
+import { Route as AuthenticatedDashboardProjectsIdRouteImport } from './routes/_authenticated/dashboard.projects.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardWalletRoute =
+  AuthenticatedDashboardWalletRouteImport.update({
+    id: '/wallet',
+    path: '/wallet',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardProjectsRoute =
+  AuthenticatedDashboardProjectsRouteImport.update({
+    id: '/projects',
+    path: '/projects',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardNotificationsRoute =
+  AuthenticatedDashboardNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardMessagesRoute =
+  AuthenticatedDashboardMessagesRouteImport.update({
+    id: '/messages',
+    path: '/messages',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardAdminRoute =
+  AuthenticatedDashboardAdminRouteImport.update({
+    id: '/admin',
+    path: '/admin',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardProjectsNewRoute =
+  AuthenticatedDashboardProjectsNewRouteImport.update({
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => AuthenticatedDashboardProjectsRoute,
+  } as any)
+const AuthenticatedDashboardProjectsIdRoute =
+  AuthenticatedDashboardProjectsIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedDashboardProjectsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
+  '/dashboard/messages': typeof AuthenticatedDashboardMessagesRoute
+  '/dashboard/notifications': typeof AuthenticatedDashboardNotificationsRoute
+  '/dashboard/projects': typeof AuthenticatedDashboardProjectsRouteWithChildren
+  '/dashboard/wallet': typeof AuthenticatedDashboardWalletRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/projects/$id': typeof AuthenticatedDashboardProjectsIdRoute
+  '/dashboard/projects/new': typeof AuthenticatedDashboardProjectsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
+  '/dashboard/messages': typeof AuthenticatedDashboardMessagesRoute
+  '/dashboard/notifications': typeof AuthenticatedDashboardNotificationsRoute
+  '/dashboard/projects': typeof AuthenticatedDashboardProjectsRouteWithChildren
+  '/dashboard/wallet': typeof AuthenticatedDashboardWalletRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/projects/$id': typeof AuthenticatedDashboardProjectsIdRoute
+  '/dashboard/projects/new': typeof AuthenticatedDashboardProjectsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/_authenticated/dashboard/admin': typeof AuthenticatedDashboardAdminRoute
+  '/_authenticated/dashboard/messages': typeof AuthenticatedDashboardMessagesRoute
+  '/_authenticated/dashboard/notifications': typeof AuthenticatedDashboardNotificationsRoute
+  '/_authenticated/dashboard/projects': typeof AuthenticatedDashboardProjectsRouteWithChildren
+  '/_authenticated/dashboard/wallet': typeof AuthenticatedDashboardWalletRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_authenticated/dashboard/projects/$id': typeof AuthenticatedDashboardProjectsIdRoute
+  '/_authenticated/dashboard/projects/new': typeof AuthenticatedDashboardProjectsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/sitemap.xml'
+    | '/dashboard'
+    | '/dashboard/admin'
+    | '/dashboard/messages'
+    | '/dashboard/notifications'
+    | '/dashboard/projects'
+    | '/dashboard/wallet'
+    | '/dashboard/'
+    | '/dashboard/projects/$id'
+    | '/dashboard/projects/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/sitemap.xml'
+    | '/dashboard/admin'
+    | '/dashboard/messages'
+    | '/dashboard/notifications'
+    | '/dashboard/projects'
+    | '/dashboard/wallet'
+    | '/dashboard'
+    | '/dashboard/projects/$id'
+    | '/dashboard/projects/new'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/sitemap.xml'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/dashboard/admin'
+    | '/_authenticated/dashboard/messages'
+    | '/_authenticated/dashboard/notifications'
+    | '/_authenticated/dashboard/projects'
+    | '/_authenticated/dashboard/wallet'
+    | '/_authenticated/dashboard/'
+    | '/_authenticated/dashboard/projects/$id'
+    | '/_authenticated/dashboard/projects/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +221,133 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/wallet': {
+      id: '/_authenticated/dashboard/wallet'
+      path: '/wallet'
+      fullPath: '/dashboard/wallet'
+      preLoaderRoute: typeof AuthenticatedDashboardWalletRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/projects': {
+      id: '/_authenticated/dashboard/projects'
+      path: '/projects'
+      fullPath: '/dashboard/projects'
+      preLoaderRoute: typeof AuthenticatedDashboardProjectsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/notifications': {
+      id: '/_authenticated/dashboard/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/notifications'
+      preLoaderRoute: typeof AuthenticatedDashboardNotificationsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/messages': {
+      id: '/_authenticated/dashboard/messages'
+      path: '/messages'
+      fullPath: '/dashboard/messages'
+      preLoaderRoute: typeof AuthenticatedDashboardMessagesRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/admin': {
+      id: '/_authenticated/dashboard/admin'
+      path: '/admin'
+      fullPath: '/dashboard/admin'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/projects/new': {
+      id: '/_authenticated/dashboard/projects/new'
+      path: '/new'
+      fullPath: '/dashboard/projects/new'
+      preLoaderRoute: typeof AuthenticatedDashboardProjectsNewRouteImport
+      parentRoute: typeof AuthenticatedDashboardProjectsRoute
+    }
+    '/_authenticated/dashboard/projects/$id': {
+      id: '/_authenticated/dashboard/projects/$id'
+      path: '/$id'
+      fullPath: '/dashboard/projects/$id'
+      preLoaderRoute: typeof AuthenticatedDashboardProjectsIdRouteImport
+      parentRoute: typeof AuthenticatedDashboardProjectsRoute
+    }
   }
 }
 
+interface AuthenticatedDashboardProjectsRouteChildren {
+  AuthenticatedDashboardProjectsIdRoute: typeof AuthenticatedDashboardProjectsIdRoute
+  AuthenticatedDashboardProjectsNewRoute: typeof AuthenticatedDashboardProjectsNewRoute
+}
+
+const AuthenticatedDashboardProjectsRouteChildren: AuthenticatedDashboardProjectsRouteChildren =
+  {
+    AuthenticatedDashboardProjectsIdRoute:
+      AuthenticatedDashboardProjectsIdRoute,
+    AuthenticatedDashboardProjectsNewRoute:
+      AuthenticatedDashboardProjectsNewRoute,
+  }
+
+const AuthenticatedDashboardProjectsRouteWithChildren =
+  AuthenticatedDashboardProjectsRoute._addFileChildren(
+    AuthenticatedDashboardProjectsRouteChildren,
+  )
+
+interface AuthenticatedDashboardRouteChildren {
+  AuthenticatedDashboardAdminRoute: typeof AuthenticatedDashboardAdminRoute
+  AuthenticatedDashboardMessagesRoute: typeof AuthenticatedDashboardMessagesRoute
+  AuthenticatedDashboardNotificationsRoute: typeof AuthenticatedDashboardNotificationsRoute
+  AuthenticatedDashboardProjectsRoute: typeof AuthenticatedDashboardProjectsRouteWithChildren
+  AuthenticatedDashboardWalletRoute: typeof AuthenticatedDashboardWalletRoute
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+}
+
+const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
+  {
+    AuthenticatedDashboardAdminRoute: AuthenticatedDashboardAdminRoute,
+    AuthenticatedDashboardMessagesRoute: AuthenticatedDashboardMessagesRoute,
+    AuthenticatedDashboardNotificationsRoute:
+      AuthenticatedDashboardNotificationsRoute,
+    AuthenticatedDashboardProjectsRoute:
+      AuthenticatedDashboardProjectsRouteWithChildren,
+    AuthenticatedDashboardWalletRoute: AuthenticatedDashboardWalletRoute,
+    AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+  }
+
+const AuthenticatedDashboardRouteWithChildren =
+  AuthenticatedDashboardRoute._addFileChildren(
+    AuthenticatedDashboardRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
