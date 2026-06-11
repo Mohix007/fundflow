@@ -75,9 +75,9 @@ function Hero() {
             <div className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-secondary" /> Auto refund on missed deadline</div>
           </div>
         </div>
-        <div className="relative">
+        <div className="relative flex items-center justify-center">
           <div className="absolute -inset-10 bg-gradient-vault blur-3xl" />
-          <img src={heroImg} alt="EditVault secure escrow vault illustration" width={1920} height={1080} className="relative rounded-2xl glass animate-float" />
+          <VaultFlow />
         </div>
       </div>
     </section>
