@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 import { VaultFlow } from "@/components/landing/VaultFlow";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import heroImg from "@/assets/hero-vault.jpg";
 import { useAuth } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/")({
