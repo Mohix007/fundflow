@@ -375,6 +375,18 @@ export type Database = {
         }
         Returns: boolean
       }
+      list_marketplace_projects: {
+        Args: never
+        Returns: {
+          budget: number
+          created_at: string
+          deadline: string
+          description: string
+          id: string
+          status: Database["public"]["Enums"]["project_status"]
+          title: string
+        }[]
+      }
     }
     Enums: {
       app_role: "client" | "editor" | "admin"
