@@ -38,8 +38,10 @@ function ProjectsList() {
   const { data: market = [] } = useQuery({
     queryKey: ["projects", "marketplace"],
     queryFn: async () => {
-      const { data } = await supabase.from("projects").select("*").eq("status", "funded").is("editor_id", null).order("created_at", { ascending: false });
-      return data ?? [];
+      const { data } = await supabase.rpc("list_marketplace_projects");
+      return (data ?? []).slice().sort((a: { created_at: string }, b: { created_at: string }) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
     },
     enabled: isEditor,
   });
